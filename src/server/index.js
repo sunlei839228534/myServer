@@ -1,7 +1,8 @@
 import React from 'react'
 import express from 'express'
-import Home from './containers/Home'
 import { renderToString } from 'react-dom/server'
+
+import Home from '../containers/Home'
 
 const app = express()
 app.use(express.static('public'))
@@ -14,7 +15,7 @@ app.get('/',function (req,res) {
    <title>ssr</title>
    </head>
    <body>
-     ${content}
+     <div id="root">${content}</div>
    </body>
    <script src="/index.js"></script>
   </html>

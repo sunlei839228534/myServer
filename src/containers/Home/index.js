@@ -3,7 +3,8 @@ import React from 'react'
 const Home = () => {
   return (
     <div>
-      dsadas
+      This is Peko
+      <button onClick={()=>{alert('peko')}}>click</button>
     </div>
   )
 }
