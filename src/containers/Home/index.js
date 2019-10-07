@@ -1,21 +1,36 @@
 import React from 'react'
 import Header from '../../components/Header'
 import { connect } from 'react-redux'
+import { getHomeList } from './store/actions'
 
-const Home = ({name}) => {
-  return (
-    <div>
-      <Header />
-      This is {name}
-      <button onClick={()=>{alert('peko')}}>click</button>
-    </div>
-  )
+class Home extends React.Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        <div>{this.props.list.map((item)=>{
+          return <div key={item.id}>{item.title}</div>
+        })}</div>
+        <button onClick={()=>{alert('peko')}}>click</button>
+      </div>
+    )
+  }
+
+  componentDidMount() { //只会在客户端渲染时被执行
+    this.props.getHomeList()
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    name: state.name
+    list: state.home.newsList
   }
 }
 
-export default connect(mapStateToProps,null)(Home)
+const mapDispatchToProps = dispatch => ({
+  getHomeList() {
+    dispatch(getHomeList())
+  }
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home)
