@@ -27,6 +27,11 @@ const mapStateToProps = (state) => {
   }
 }
 
+Home.loadData = () => {
+  // 这个函数,负责在服务器端渲染之前.吧这个路由需要的数据加载好
+  
+}
+
 const mapDispatchToProps = dispatch => ({
   getHomeList() {
     dispatch(getHomeList())

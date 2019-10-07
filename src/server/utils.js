@@ -6,8 +6,12 @@ import { Provider } from 'react-redux'
 import getStore from '../store'
 
 export const render = (req) => {
+
+  const store = getStore()
+  
+
   const content = renderToString((
-    <Provider store={getStore()}>
+    <Provider store={store}>
       <StaticRouter location={req.path} context={{}}>
         {Routes}
       </StaticRouter>
