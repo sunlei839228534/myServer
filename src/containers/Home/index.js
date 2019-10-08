@@ -17,7 +17,9 @@ class Home extends React.Component {
   }
 
   componentDidMount() { //只会在客户端渲染时被执行
-    this.props.getHomeList()
+    if(!this.props.list.length) {
+      this.props.getHomeList()
+    }
   }
 }
 
@@ -27,9 +29,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-Home.loadData = () => {
+Home.loadData = (store) => {
   // 这个函数,负责在服务器端渲染之前.吧这个路由需要的数据加载好
-  
+  return store.dispatch(getHomeList())
 }
 
 const mapDispatchToProps = dispatch => ({
