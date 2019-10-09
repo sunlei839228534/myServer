@@ -3,10 +3,17 @@ import { render } from './utils'
 import {getStore} from '../store'
 import { matchRoutes } from 'react-router-config'
 import Routes from '../Routes'
+import proxy from 'express-http-proxy'
 
 
 const app = express()
 app.use(express.static('public'))//静态路由
+
+app.use('/api',proxy('http://47.95.113.63', {
+  proxyReqPathResolver: function (req) {
+    return '/ssr/api' + req.url;
+  }
+}))
 
 app.get('*',function (req,res) {
 
