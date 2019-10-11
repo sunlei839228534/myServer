@@ -17,7 +17,7 @@ app.use('/api',proxy('http://47.95.113.63', {
 
 app.get('*',function (req,res) {
 
-  const store = getStore();
+  const store = getStore(req);
 
   const matchedRoutes = matchRoutes(Routes,req.path)
   //结合当前用户请求地址和路由做判断
@@ -31,6 +31,7 @@ app.get('*',function (req,res) {
       promises.push(item.route.loadData(store))
     }
   })
+  console.log(promises)
   Promise.all(promises).then(()=>{
     res.send(render(store,Routes,req))
   })
